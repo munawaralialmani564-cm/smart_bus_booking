@@ -1,0 +1,248 @@
+SMART BUS TICKET BOOKING & RESERVATION SYSTEM - TEST CASES
+======================================================================
+These results were produced by actually running main.py with run_tests.py.
+Every test starts from a fresh run (5 starter routes, no bookings).
+'Actual result' is taken from the program's real output and its real data.
+Menu note: option 8 = Exit, option 9 = Route Schedule.
+Summary: 30 of 30 tests matched the expected result.
+======================================================================
+
+Test ID        : TC-01
+Scenario       : View all routes
+Input / action : Menu 1, answer 'n' to the available-only filter, then Exit
+Expected result: All five routes appear with their seat status (all 'Available' at the start).
+Actual result  : Rows shown: R101, R102, R103, R104, R105; 5 rows have status 'Available'. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-02
+Scenario       : Search Hyderabad
+Input / action : Menu 2, search text 'Hyderabad', then Exit
+Expected result: R101 (arrives), R103 (departs) and R105 (arrives) appear; R102 and R104 do not.
+Actual result  : Routes shown: R101, R103, R105. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-03
+Scenario       : Unknown city
+Input / action : Menu 2, search text 'Atlantis', then Exit
+Expected result: A no-match message is shown and the program keeps running (menu returns, Exit works).
+Actual result  : No-match message shown: True; program kept running and exited normally: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-04
+Scenario       : Book two seats
+Input / action : Menu 3: name Ahmed, age 25, route R101, seats 2
+Expected result: Booking confirmed, total Rs. 2,400, R101 availability drops from 40 to 38.
+Actual result  : Booking B1001 created, total_fare=2400, status=Confirmed; R101 available seats = 38 of 40. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-05
+Scenario       : Zero seats
+Input / action : Menu 3: name Ahmed, age 25, route R101, seats 0
+Expected result: Rejected; no booking is created and no seat count changes.
+Actual result  : Rejection message shown: True; bookings stored = 0; R101 available seats = 40. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-06
+Scenario       : Too many seats
+Input / action : Menu 3: name Ahmed, age 25, route R101, seats 41 (capacity is 40)
+Expected result: Rejected; availability stays 40 and never becomes negative.
+Actual result  : Rejection message shown: True; bookings stored = 0; R101 available seats = 40; lowest seat count on any route = 30. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-07
+Scenario       : Cancel a confirmed booking
+Input / action : Book 2 seats on R101 (B1001), then Menu 5 with B1001
+Expected result: Status becomes Cancelled, exactly 2 seats are restored (R101 back to 40), record is kept.
+Actual result  : Booking record kept: 1; status=Cancelled; 'Seats restored : 2' shown: True; R101 available seats = 40. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-08
+Scenario       : Cancel the same booking again
+Input / action : Book 2 seats (B1001), cancel B1001, cancel B1001 a second time
+Expected result: Second cancellation is rejected and seats are NOT restored a second time.
+Actual result  : 'already Cancelled' error shown: True; 'Seats restored' printed 1 time(s); R101 available seats = 40. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-09
+Scenario       : Report with no bookings
+Input / action : Menu 7 on a fresh run
+Expected result: All booking counts, reserved seats and revenue are 0; fully booked routes is still calculated (0).
+Actual result  : Total=0, Confirmed=0, Cancelled=0, Reserved seats=0, Revenue=Rs. 0, Fully booked routes=0. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-10
+Scenario       : Book all remaining seats
+Input / action : Book 2 seats on R101, then book the remaining 38; view routes; view availability with filter 'y'
+Expected result: Second booking succeeds, R101 shows 0 seats and 'Fully Booked', and the filter hides R101.
+Actual result  : R101 available seats = 0; status = Fully Booked; 'Fully Booked' shown in listing: True; hidden when the available-only filter is on: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-11
+Scenario       : Report after cancellation
+Input / action : Book 2 seats on R101 (Rs. 2,400), book 3 seats on R102 (Rs. 6,000), cancel B1001, Menu 7
+Expected result: Total 2, confirmed 1, cancelled 1, reserved seats 3, revenue Rs. 6,000 (cancelled fare excluded).
+Actual result  : Total=2, Confirmed=1, Cancelled=1, Reserved seats=3, Revenue=Rs. 6,000; reconciliation check printed OK: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : TC-12
+Scenario       : Invalid menu option
+Input / action : Type 'abc', '0', '10', '-3' and an empty line at the menu, then 8
+Expected result: Each bad entry gives a helpful error and returns to the menu without crashing.
+Actual result  : 'Invalid ...' message shown 5 time(s) for 5 bad entries; program still exited normally: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-01
+Scenario       : Invalid age text
+Input / action : Menu 3: name Ahmed, age 'abc'
+Expected result: Rejected with an age error; no booking; no seat change.
+Actual result  : Message shown: True; bookings stored = 0; all routes still at full availability: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-02
+Scenario       : Zero age
+Input / action : Menu 3: name Ahmed, age 0
+Expected result: Rejected with an age error; no booking; no seat change.
+Actual result  : Message shown: True; bookings stored = 0; all routes still at full availability: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-03
+Scenario       : Negative age
+Input / action : Menu 3: name Ahmed, age -5
+Expected result: Rejected with an age error; no booking; no seat change.
+Actual result  : Message shown: True; bookings stored = 0; all routes still at full availability: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-04
+Scenario       : Blank passenger name (spaces only)
+Input / action : Menu 3: name '   '
+Expected result: Rejected with a name error; no booking; no seat change.
+Actual result  : Message shown: True; bookings stored = 0; all routes still at full availability: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-05
+Scenario       : Unknown route ID
+Input / action : Menu 3: name Ahmed, age 25, route R999
+Expected result: Rejected: route does not exist; no booking; no seat change.
+Actual result  : Message shown: True; bookings stored = 0; all routes still at full availability: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-06
+Scenario       : Seat quantity is text
+Input / action : Menu 3: name Ahmed, age 25, route R101, seats 'two'
+Expected result: Rejected with a seats error; no booking; no seat change.
+Actual result  : Message shown: True; bookings stored = 0; all routes still at full availability: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-07
+Scenario       : Negative seat quantity
+Input / action : Menu 3: name Ahmed, age 25, route R101, seats -2
+Expected result: Rejected with a seats error; no booking; no seat change.
+Actual result  : Message shown: True; bookings stored = 0; all routes still at full availability: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-08
+Scenario       : One more than available
+Input / action : Book 31 seats on R103 (leaves 1), then request 2 seats on R103
+Expected result: Second request is rejected; R103 still has 1 seat; only 1 booking exists.
+Actual result  : Bookings stored = 1; R103 available seats = 1; over-request rejected: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-09
+Scenario       : Exactly all seats of a route
+Input / action : Book 32 seats (the full capacity) on R103
+Expected result: Booking succeeds (32 x 800 = 25,600); availability becomes 0; status Fully Booked.
+Actual result  : R103 available seats = 0; status = Fully Booked; total_fare = 25600. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-10
+Scenario       : Book on a fully booked route
+Input / action : Book all 40 seats on R101, then try to book 1 more seat on R101
+Expected result: Second booking is rejected with a 'Fully Booked' message; availability stays 0.
+Actual result  : Bookings stored = 1; 'Fully Booked' error shown: True; R101 available seats = 0. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-11
+Scenario       : Unique booking IDs
+Input / action : Make two valid bookings in one run
+Expected result: Two different IDs (B1001, B1002), both recorded in the issued-IDs set.
+Actual result  : Booking IDs issued: ['B1001', 'B1002']; issued_booking_ids set = ['B1001', 'B1002']. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-12
+Scenario       : Search by route ID (lower case)
+Input / action : Menu 2, search text 'r101'
+Expected result: Only route R101 is shown (search stops at the unique match).
+Actual result  : Routes shown: R101. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-13
+Scenario       : Search by destination city (mixed case)
+Input / action : Menu 2, search text 'MiRpUr KhAs'
+Expected result: Only R103 (Hyderabad -> Mirpur Khas) is shown.
+Actual result  : Routes shown: R103. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-14
+Scenario       : Route schedule for all supported cities
+Input / action : Menu 9
+Expected result: All five cities are listed; Mirpur Khas and Lahore show 'No scheduled departures.'.
+Actual result  : 'No scheduled departures.' shown 2 time(s) (Mirpur Khas and Lahore). (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-15
+Scenario       : View bookings with an empty list
+Input / action : Menu 4 on a fresh run
+Expected result: 'No bookings found.' is shown.
+Actual result  : 'No bookings found.' shown: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-16
+Scenario       : Cancel an unknown booking ID
+Input / action : Menu 5 with B9999
+Expected result: Error shown; nothing changes.
+Actual result  : Error shown: True; bookings = 0; seats unchanged. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-17
+Scenario       : Rebook after a cancellation
+Input / action : Book all 40 seats on R101, cancel it, then book 1 seat on R101
+Expected result: Cancel restores 40 seats, the new booking uses 1: R101 has 39 left; both records kept.
+Actual result  : R101 available seats = 39; statuses = ['Cancelled', 'Confirmed']. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------
+
+Test ID        : B-18
+Scenario       : Report reconciles with seat counts (mixed activity)
+Input / action : Fill R103 completely (32 seats), book 1 seat on R101, book then cancel 2 seats on R102, Menu 7
+Expected result: Reserved seats 33 is the sum of Confirmed seats, which matches capacity minus available; revenue excludes the cancelled booking.
+Actual result  : Reserved seats=33, Revenue=Rs. 26,800, Fully booked routes=1; reconciliation line printed: True. (BR-13 holds: 0 <= available <= total for every route.)
+Matched?       : PASS
+----------------------------------------------------------------------

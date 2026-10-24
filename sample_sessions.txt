@@ -1,0 +1,749 @@
+SMART BUS - SAMPLE TERMINAL SESSIONS
+======================================================================
+These are real transcripts produced by running main.py with scripted answers
+(what you type is shown after each prompt). Each session starts from a fresh run.
+To keep them short, the main menu is shown in full only the first time.
+
+######################################################################
+SESSION: Viewing routes
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 1
+
+--- ROUTES ---
+Show only routes with seats available? (y/n): n
+
+No.  Route   Journey                   Departs   Fare       Seats Left  Status
+--------------------------------------------------------------------------------
+1    R101    Karachi -> Hyderabad      08:00 AM  Rs. 1,200  40          Available
+2    R102    Karachi -> Sukkur         09:30 AM  Rs. 2,000  36          Available
+3    R103    Hyderabad -> Mirpur Khas  11:00 AM  Rs. 800    32          Available
+4    R104    Karachi -> Lahore         07:00 PM  Rs. 5,000  45          Available
+5    R105    Sukkur -> Hyderabad       02:00 PM  Rs. 1,500  30          Available
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Searching (route ID, city with several matches, unknown city)
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 2
+
+--- SEARCH FOR A ROUTE ---
+Enter a route ID or a city name: R102
+
+Route found:
+  Route ID       : R102
+  Journey        : Karachi -> Sukkur
+  Departure time : 09:30 AM
+  Ticket price   : Rs. 2,000 per seat
+  Seats          : 36 available of 36
+  Status         : Available
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 2
+
+--- SEARCH FOR A ROUTE ---
+Enter a route ID or a city name: Hyderabad
+
+Match 1:
+  Route ID       : R101
+  Journey        : Karachi -> Hyderabad
+  Departure time : 08:00 AM
+  Ticket price   : Rs. 1,200 per seat
+  Seats          : 40 available of 40
+  Status         : Available
+
+Match 2:
+  Route ID       : R103
+  Journey        : Hyderabad -> Mirpur Khas
+  Departure time : 11:00 AM
+  Ticket price   : Rs. 800 per seat
+  Seats          : 32 available of 32
+  Status         : Available
+
+Match 3:
+  Route ID       : R105
+  Journey        : Sukkur -> Hyderabad
+  Departure time : 02:00 PM
+  Ticket price   : Rs. 1,500 per seat
+  Seats          : 30 available of 30
+  Status         : Available
+
+3 matching route(s) found.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 2
+
+--- SEARCH FOR A ROUTE ---
+Enter a route ID or a city name: Atlantis
+No route found for 'atlantis'.
+Try a route ID like R101, or one of these cities: Karachi, Hyderabad, Sukkur, Mirpur Khas, Lahore.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Successful booking
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: 25
+Route ID (for example R101): R101
+Number of seats: 2
+
+*** BOOKING CONFIRMED ***
+  Booking ID    : B1001
+  Passenger     : Ahmed (age 25)
+  Route         : R101 - Karachi -> Hyderabad
+  Departure     : 08:00 AM
+  Seats booked  : 2
+  Fare per seat : Rs. 1,200
+  Total fare    : Rs. 2,400
+  Status        : Confirmed
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 4
+
+--- BOOKING HISTORY ---
+No.  Booking  Passenger       Route                         Seats  Total Fare   Status
+----------------------------------------------------------------------------------------
+1    B1001    Ahmed           R101 Karachi -> Hyderabad     2      Rs. 2,400    Confirmed
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Invalid bookings (blank name, bad age, unknown route, zero seats, too many seats)
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name:    
+Error: passenger name cannot be empty. Booking was NOT created. No seats were changed.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: abc
+Error: age must be a positive whole number (for example 25). Booking was NOT created. No seats were changed.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: 25
+Route ID (for example R101): R999
+Error: route 'R999' does not exist. Booking was NOT created. No seats were changed.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: 25
+Route ID (for example R101): R101
+Number of seats: 0
+Error: number of seats must be a positive whole number (1 or more). Booking was NOT created. No seats were changed.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: 25
+Route ID (for example R101): R101
+Number of seats: 41
+Error: only 40 seat(s) are available on route R101, but you asked for 41. Booking was NOT created. No seats were changed.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 4
+
+--- BOOKING HISTORY ---
+No bookings found.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 6
+
+--- SEAT AVAILABILITY ---
+Show only routes with seats available? (y/n): n
+
+No.  Route   Journey                   Available  Capacity  Status
+------------------------------------------------------------------------
+1    R101    Karachi -> Hyderabad      40         40        Available
+2    R102    Karachi -> Sukkur         36         36        Available
+3    R103    Hyderabad -> Mirpur Khas  32         32        Available
+4    R104    Karachi -> Lahore         45         45        Available
+5    R105    Sukkur -> Hyderabad       30         30        Available
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Cancellation (booking, cancel, history, availability)
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: 25
+Route ID (for example R101): R101
+Number of seats: 2
+
+*** BOOKING CONFIRMED ***
+  Booking ID    : B1001
+  Passenger     : Ahmed (age 25)
+  Route         : R101 - Karachi -> Hyderabad
+  Departure     : 08:00 AM
+  Seats booked  : 2
+  Fare per seat : Rs. 1,200
+  Total fare    : Rs. 2,400
+  Status        : Confirmed
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 5
+
+--- CANCEL A BOOKING ---
+Enter the booking ID to cancel (for example B1001): B1001
+
+*** BOOKING CANCELLED ***
+  Booking ID     : B1001
+  Passenger      : Ahmed
+  Route          : R101 - Karachi -> Hyderabad
+  Seats restored : 2
+  Seats now free : 40 of 40
+  Status         : Cancelled
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 4
+
+--- BOOKING HISTORY ---
+No.  Booking  Passenger       Route                         Seats  Total Fare   Status
+----------------------------------------------------------------------------------------
+1    B1001    Ahmed           R101 Karachi -> Hyderabad     2      Rs. 2,400    Cancelled
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 6
+
+--- SEAT AVAILABILITY ---
+Show only routes with seats available? (y/n): n
+
+No.  Route   Journey                   Available  Capacity  Status
+------------------------------------------------------------------------
+1    R101    Karachi -> Hyderabad      40         40        Available
+2    R102    Karachi -> Sukkur         36         36        Available
+3    R103    Hyderabad -> Mirpur Khas  32         32        Available
+4    R104    Karachi -> Lahore         45         45        Available
+5    R105    Sukkur -> Hyderabad       30         30        Available
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Repeated cancellation of the same booking
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: 25
+Route ID (for example R101): R101
+Number of seats: 2
+
+*** BOOKING CONFIRMED ***
+  Booking ID    : B1001
+  Passenger     : Ahmed (age 25)
+  Route         : R101 - Karachi -> Hyderabad
+  Departure     : 08:00 AM
+  Seats booked  : 2
+  Fare per seat : Rs. 1,200
+  Total fare    : Rs. 2,400
+  Status        : Confirmed
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 5
+
+--- CANCEL A BOOKING ---
+Enter the booking ID to cancel (for example B1001): B1001
+
+*** BOOKING CANCELLED ***
+  Booking ID     : B1001
+  Passenger      : Ahmed
+  Route          : R101 - Karachi -> Hyderabad
+  Seats restored : 2
+  Seats now free : 40 of 40
+  Status         : Cancelled
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 5
+
+--- CANCEL A BOOKING ---
+Enter the booking ID to cancel (for example B1001): B1001
+Error: booking B1001 is already Cancelled. Nothing was changed and no seats were restored.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 6
+
+--- SEAT AVAILABILITY ---
+Show only routes with seats available? (y/n): n
+
+No.  Route   Journey                   Available  Capacity  Status
+------------------------------------------------------------------------
+1    R101    Karachi -> Hyderabad      40         40        Available
+2    R102    Karachi -> Sukkur         36         36        Available
+3    R103    Hyderabad -> Mirpur Khas  32         32        Available
+4    R104    Karachi -> Lahore         45         45        Available
+5    R105    Sukkur -> Hyderabad       30         30        Available
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Seat availability (after bookings, with and without the filter)
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: 25
+Route ID (for example R101): R101
+Number of seats: 2
+
+*** BOOKING CONFIRMED ***
+  Booking ID    : B1001
+  Passenger     : Ahmed (age 25)
+  Route         : R101 - Karachi -> Hyderabad
+  Departure     : 08:00 AM
+  Seats booked  : 2
+  Fare per seat : Rs. 1,200
+  Total fare    : Rs. 2,400
+  Status        : Confirmed
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Sara
+Passenger age: 30
+Route ID (for example R101): R103
+Number of seats: 32
+
+*** BOOKING CONFIRMED ***
+  Booking ID    : B1002
+  Passenger     : Sara (age 30)
+  Route         : R103 - Hyderabad -> Mirpur Khas
+  Departure     : 11:00 AM
+  Seats booked  : 32
+  Fare per seat : Rs. 800
+  Total fare    : Rs. 25,600
+  Status        : Confirmed
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 6
+
+--- SEAT AVAILABILITY ---
+Show only routes with seats available? (y/n): n
+
+No.  Route   Journey                   Available  Capacity  Status
+------------------------------------------------------------------------
+1    R101    Karachi -> Hyderabad      38         40        Partially Booked
+2    R102    Karachi -> Sukkur         36         36        Available
+3    R103    Hyderabad -> Mirpur Khas  0          32        Fully Booked
+4    R104    Karachi -> Lahore         45         45        Available
+5    R105    Sukkur -> Hyderabad       30         30        Available
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 6
+
+--- SEAT AVAILABILITY ---
+Show only routes with seats available? (y/n): y
+
+No.  Route   Journey                   Available  Capacity  Status
+------------------------------------------------------------------------
+1    R101    Karachi -> Hyderabad      38         40        Partially Booked
+2    R102    Karachi -> Sukkur         36         36        Available
+3    R104    Karachi -> Lahore         45         45        Available
+4    R105    Sukkur -> Hyderabad       30         30        Available
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Route schedule by departure city
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 9
+
+--- ROUTE SCHEDULE BY DEPARTURE CITY ---
+
+Departures from Karachi:
+  08:00 AM  R101  Karachi -> Hyderabad  Rs. 1,200
+  09:30 AM  R102  Karachi -> Sukkur  Rs. 2,000
+  07:00 PM  R104  Karachi -> Lahore  Rs. 5,000
+
+Departures from Hyderabad:
+  11:00 AM  R103  Hyderabad -> Mirpur Khas  Rs. 800
+
+Departures from Sukkur:
+  02:00 PM  R105  Sukkur -> Hyderabad  Rs. 1,500
+
+Departures from Mirpur Khas:
+  No scheduled departures.
+
+Departures from Lahore:
+  No scheduled departures.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Report with no bookings
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 7
+
+--- BOOKING REPORT ---
+Confirmed bookings grouped by route:
+  R101 Karachi -> Hyderabad       bookings: 0   seats: 0    revenue: Rs. 0
+  R102 Karachi -> Sukkur          bookings: 0   seats: 0    revenue: Rs. 0
+  R103 Hyderabad -> Mirpur Khas   bookings: 0   seats: 0    revenue: Rs. 0
+  R104 Karachi -> Lahore          bookings: 0   seats: 0    revenue: Rs. 0
+  R105 Sukkur -> Hyderabad        bookings: 0   seats: 0    revenue: Rs. 0
+
+Total bookings created      : 0 (includes cancelled)
+Confirmed bookings          : 0
+Cancelled bookings          : 0
+Seats currently reserved    : 0
+Confirmed revenue           : Rs. 0 (cancelled fares excluded)
+Fully booked routes         : 0
+Check: report totals agree with the booking records and route seat counts. OK
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Report after bookings and a cancellation
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Ahmed
+Passenger age: 25
+Route ID (for example R101): R101
+Number of seats: 2
+
+*** BOOKING CONFIRMED ***
+  Booking ID    : B1001
+  Passenger     : Ahmed (age 25)
+  Route         : R101 - Karachi -> Hyderabad
+  Departure     : 08:00 AM
+  Seats booked  : 2
+  Fare per seat : Rs. 1,200
+  Total fare    : Rs. 2,400
+  Status        : Confirmed
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 3
+
+--- BOOK A TICKET ---
+Passenger name: Sara
+Passenger age: 30
+Route ID (for example R101): R102
+Number of seats: 3
+
+*** BOOKING CONFIRMED ***
+  Booking ID    : B1002
+  Passenger     : Sara (age 30)
+  Route         : R102 - Karachi -> Sukkur
+  Departure     : 09:30 AM
+  Seats booked  : 3
+  Fare per seat : Rs. 2,000
+  Total fare    : Rs. 6,000
+  Status        : Confirmed
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 5
+
+--- CANCEL A BOOKING ---
+Enter the booking ID to cancel (for example B1001): B1001
+
+*** BOOKING CANCELLED ***
+  Booking ID     : B1001
+  Passenger      : Ahmed
+  Route          : R101 - Karachi -> Hyderabad
+  Seats restored : 2
+  Seats now free : 40 of 40
+  Status         : Cancelled
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 7
+
+--- BOOKING REPORT ---
+Confirmed bookings grouped by route:
+  R101 Karachi -> Hyderabad       bookings: 0   seats: 0    revenue: Rs. 0
+  R102 Karachi -> Sukkur          bookings: 1   seats: 3    revenue: Rs. 6,000
+  R103 Hyderabad -> Mirpur Khas   bookings: 0   seats: 0    revenue: Rs. 0
+  R104 Karachi -> Lahore          bookings: 0   seats: 0    revenue: Rs. 0
+  R105 Sukkur -> Hyderabad        bookings: 0   seats: 0    revenue: Rs. 0
+
+Total bookings created      : 2 (includes cancelled)
+Confirmed bookings          : 1
+Cancelled bookings          : 1
+Seats currently reserved    : 3
+Confirmed revenue           : Rs. 6,000 (cancelled fares excluded)
+Fully booked routes         : 0
+Check: report totals agree with the booking records and route seat counts. OK
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
+
+######################################################################
+SESSION: Invalid menu choices
+######################################################################
+==============================================================
+        SMART BUS TICKET BOOKING & RESERVATION SYSTEM         
+==============================================================
+(All data is kept in memory only and is lost when you exit.)
+
+------------------------- MAIN MENU -------------------------
+1. View Available Routes
+2. Search for a Route
+3. Book a Ticket
+4. View My Bookings
+5. Cancel a Booking
+6. View Seat Availability
+7. Generate Booking Report
+8. Exit
+9. View Route Schedule by Departure City
+
+Enter your choice (1-9): abc
+Invalid input: please type a number from the menu (1-9), not text.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 0
+Invalid choice: 0 is not on the menu. Please choose 1 to 9.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 10
+Invalid choice: 10 is not on the menu. Please choose 1 to 9.
+
+[... main menu shown again ...]
+
+Enter your choice (1-9): 8
+
+Thank you for using the Smart Bus system. Goodbye!
